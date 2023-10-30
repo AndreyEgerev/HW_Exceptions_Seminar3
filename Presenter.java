@@ -7,6 +7,7 @@ import HW_Exceptions.HW_Exceptions3.View.ViewData;
 import HW_Exceptions.HW_Exceptions3.View.WorkWithFile;
 
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.util.ArrayList;
 
 public class Presenter {
@@ -74,7 +75,7 @@ public class Presenter {
                         parseSuccess = false;
                     }
                 }
-            }catch (IllegalArgumentException e){
+            }catch (IllegalArgumentException | DateTimeException e){
                 currentLog.writeLog(e.getMessage());
                 parseSuccess = false;
                 e.printStackTrace();

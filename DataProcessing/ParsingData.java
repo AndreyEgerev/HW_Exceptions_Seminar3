@@ -1,5 +1,6 @@
 package HW_Exceptions.HW_Exceptions3.DataProcessing;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 public class ParsingData {
@@ -27,9 +28,13 @@ public class ParsingData {
      * @param inputDate дата в формате String
      * @return дата в формате LocalDate
      */
-    public static LocalDate parseDate(String inputDate){
+    public static LocalDate parseDate(String inputDate) throws DateTimeException {
         String[] date = inputDate.trim().split("\\.");
-        return LocalDate.of(Integer.parseInt(date[2]),Integer.parseInt(date[1]),Integer.parseInt(date[0]));
+        try {
+            return LocalDate.of(Integer.parseInt(date[2]),Integer.parseInt(date[1]),Integer.parseInt(date[0]));
+        }catch (DateTimeException e){
+            throw new DateTimeException("Неправильная дата " + inputDate);
+        }
     }
 
     /** Определение содержания поля
