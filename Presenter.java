@@ -11,13 +11,11 @@ import java.util.ArrayList;
 
 public class Presenter {
     private final ViewData currentLog;
-    private WorkWithFile fileData;
     private String path;
-    private static String fileExtension = ".txt";
+    private static final String fileExtension = ".txt";
 
     public Presenter() {
         this.currentLog = new ViewData();
-        //this.fileData = new WorkWithFile();
     }
 
     /** Запись данных пользователя в файл
@@ -79,6 +77,7 @@ public class Presenter {
             }catch (IllegalArgumentException e){
                 currentLog.writeLog(e.getMessage());
                 parseSuccess = false;
+                e.printStackTrace();
             }
         }
         if (parseSuccess){
@@ -87,6 +86,7 @@ public class Presenter {
                 currentLog.writeMessage("Данные пользователя " +userData.getSurname()+ " сохранены");
             } catch (IOException e) {
                 currentLog.writeMessage("Некоректная работа с файлом - " + e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -103,7 +103,7 @@ public class Presenter {
             currentLog.writeMessage(indexFile +". "+ fileName);
             indexFile++;
         }
-        currentLog.writeMessage(String.valueOf(indexFile) + ". Возврат в предыдущее меню");
+        currentLog.writeMessage(indexFile + ". Возврат в предыдущее меню");
         boolean runSelectFile = true;
         while (runSelectFile) {
             try {
@@ -124,6 +124,7 @@ public class Presenter {
             currentLog.writeMessage(dataUser);
         } catch (IOException e) {
             currentLog.writeMessage("Некоректная работа с файлом - " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -160,20 +161,15 @@ public class Presenter {
      */
     private boolean onStop(String message) {
         currentLog.writeMessage(message);
-        //currentLog.setLog(new LogFile(pathLog));
-        //currentLog.writeLog(message);
         return false;
     }
 
-    /** Процедура запуска программы
-     *
-     * @return
+    /**
+     * Процедура запуска программы
      */
-    public boolean onStart() {
+    public void onStart() {
        path = System.getProperty("user.dir") + "\\untitled\\src\\HW_Exceptions\\HW_Exceptions3\\Source\\";
-        //path = path + "\\untitled\\src\\HW_Exceptions\\HW_Exceptions3\\Source\\";
         onRun();
-        return true;
     }
 
     /** Первоначальное меню с выбором действий пользователя
@@ -190,7 +186,6 @@ public class Presenter {
             switch (choiceUser) {
                 case "1":
                     dataOperation();
-                    //run = operation();
                     break;
                 case "2":
                     run = onStop("Завершение работы");

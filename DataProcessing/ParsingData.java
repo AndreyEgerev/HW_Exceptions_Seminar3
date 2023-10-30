@@ -110,7 +110,7 @@ public class ParsingData {
             if (inputData.matches("\\d+")) {
                 return true;
             } else {
-                throw new IllegalArgumentException("Номер телефона " + inputData + " должен содержатьтолько цифры");
+                throw new IllegalArgumentException("Номер телефона " + inputData + " должен содержать только цифры");
             }
         }else {
             throw new IllegalArgumentException("Номер телефона " + inputData + " содержит неверное количество цифр");
@@ -124,7 +124,7 @@ public class ParsingData {
      */
     private static boolean checkSex (String inputData) throws IllegalArgumentException {
         if (inputData.length() == 1) {
-            if (inputData.matches("[fm]")) {
+            if (inputData.matches("[fmFM]")) {
                 return true;
             }else
                 throw new IllegalArgumentException("Неправильно введен пол. Некоректные данные");
